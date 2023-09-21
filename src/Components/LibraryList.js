@@ -14,9 +14,8 @@ function LibraryList() {
   const getAllBooks = async() => {
     try{
        const response = await axios.get(`${API_BASE_URL}/books`);
-       const data = response.json();
-       setBooks(data)
-       console.log(data)
+       setBooks(response.data)
+       console.log(response.data)
     }catch(err){
         console.log(err)
     }
@@ -37,11 +36,11 @@ function LibraryList() {
       </Button>
       </Link>
       <Grid container spacing={2}>
-        {books.map((book) => (
+        {books.map((book) => {return(
           <Grid item xs={12} sm={6} md={4} key={book.id}>
             <LibraryItem book={book} />
           </Grid>
-        ))}
+        )})}
       </Grid>
     </Container>
   );
