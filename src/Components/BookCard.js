@@ -26,7 +26,7 @@ function BookCard({ book, id }) {
 const navigate = useNavigate();
 
   return (
-    <Card style={{width : '350px', minHeight : '450px', height : 'fit-content', margin : '15px auto', padding : '5px'}} className="library-item" elevation={3}>
+    <Card style={{width : '350px', minHeight : '450px', height : 'fit-content', margin : '2%', padding : '5px'}} className="library-item" elevation={3}>
       <CardContent>
         <Typography style = {{fontWeight : 'bold', margin : '10px auto'}} variant="h5" component="div">
           {book.name}
@@ -43,7 +43,7 @@ const navigate = useNavigate();
         </Button>
       </CardContent>
       <CardActions>
-      <Button onClick={navigate(`/edit/${id}`)} variant="outlined" startIcon={<EditIcon />}>
+      <Button onClick={()=>navigate(`/edit/${id}`)} variant="outlined" startIcon={<EditIcon />}>
         Edit
       </Button>
       <Button onClick={() => deleteBook(id)} variant="outlined" startIcon={<DeleteIcon />}>

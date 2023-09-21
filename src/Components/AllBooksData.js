@@ -33,13 +33,11 @@ function AllBooksData() {
         Add Book
       </Button>
       </Link>
-      <Grid container spacing={2}>
+      <div style={{display : 'flex', flexDirection : 'row'}}>
         {books.map((book, index) => {return(
-          <Grid item xs={12} sm={6} md={4} key={book.id}>
             <BookCard key={index} id = {book._id} book={book} />
-          </Grid>
         )})}
-      </Grid>
+      </div>
     </Container>
   );
 }
