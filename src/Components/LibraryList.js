@@ -12,6 +12,7 @@ function LibraryList() {
   useEffect(() => {
     getAllBooks().then((response) => {
       setBooks(response.data);
+      console.log(response.data);
     });
   }, []);
 
