@@ -36,9 +36,9 @@ function LibraryList() {
       </Button>
       </Link>
       <Grid container spacing={2}>
-        {books.map((book) => {return(
+        {books.map((book, index) => {return(
           <Grid item xs={12} sm={6} md={4} key={book.id}>
-            <LibraryItem book={book} />
+            <LibraryItem key={index} book={book} />
           </Grid>
         )})}
       </Grid>

@@ -10,9 +10,9 @@ function LibraryItem({ book }) {
     <Card style={{width : '250px', height : 'fit-content', margin : '15px', padding : '5px'}} className="library-item" elevation={3}>
       <CardContent>
         <Typography style = {{fontWeight : 'bold', margin : '10px auto'}} variant="h5" component="div">
-          {book.title}
+          {book.name}
         </Typography>
-        <image style={{width : '200px', height : '300px', margin : '10px auto'}} src = {book.poster} alt = "book.title" />
+        <image style={{width : '200px', height : '300px', margin : '10px auto'}} src = {book.poster} alt = {book.title} />
         <Typography style={{margin : '10px auto'}} variant="body2" color="text.secondary">
           <strong>Rating:</strong> {book.rating}
         </Typography>
