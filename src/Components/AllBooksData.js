@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 import BookCard from './BookCard';
 import axios from 'axios';
 import API_BASE_URL from './global'
@@ -32,11 +33,11 @@ function AllBooksData() {
         Add Book
       </Button>
       </Link>
-      <div style={{display : 'flex', flexDirection : 'row', flexWrap : 'wrap' }}>
+      <Grid >
         {books.map((book, index) => {return(
             <BookCard key={index} id = {book._id} book={book} />
         )})}
-      </div>
+      </Grid>
     </Container>
   );
 }
