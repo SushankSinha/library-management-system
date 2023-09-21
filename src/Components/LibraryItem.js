@@ -38,13 +38,13 @@ function LibraryItem({ book }) {
          Status : {available===true? 'Available' : 'Unavailable'}
         </Button>
         <Link to = {`/edit/${book.id}`} style={{color : 'white', textDecoration : 'none'}}>
-        <Button color='warning' style={{display : 'flex', flexDirection : 'row', margin : '5px 25px'}}>
+        <button className='btn btn-warning' style={{display : 'flex', flexDirection : 'row', margin : '5px 25px'}}>
          <EditIcon/>
-        </Button>
+        </button>
         </Link>
-        <Button color='danger' onClick = {deleteBook} style={{display : 'flex', flexDirection : 'row', margin : '5px 25px'}}>
+        <button className='btn btn-danger' onClick = {deleteBook} style={{display : 'flex', flexDirection : 'row', margin : '5px 25px'}}>
          <DeleteIcon/>
-        </Button>
+        </button>
       </CardContent>
     </Card>
   );
