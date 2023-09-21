@@ -32,7 +32,7 @@ function AllBooksData() {
         Add Book
       </Button>
       </Link>
-      <div style={{display : 'flex', flexDirection : 'row'}}>
+      <div style={{display : 'flex', flexDirection : 'row', flexWrap : 'wrap' }}>
         {books.map((book, index) => {return(
             <BookCard key={index} id = {book._id} book={book} />
         )})}
