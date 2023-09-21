@@ -39,8 +39,8 @@ function LibraryForm({ match, history }) {
                 <Field
                   as={TextField}
                   fullWidth
-                  name="author"
-                  label="Author"
+                  name="poster"
+                  label="Poster"
                   variant="outlined"
                 />
               </Grid>
@@ -48,8 +48,17 @@ function LibraryForm({ match, history }) {
                 <Field
                   as={TextField}
                   fullWidth
-                  name="year"
-                  label="Year"
+                  name="rating"
+                  label="Rating"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  as={TextField}
+                  fullWidth
+                  name="summary"
+                  label="Summary"
                   variant="outlined"
                 />
               </Grid>
