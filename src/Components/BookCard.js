@@ -43,8 +43,12 @@ const navigate = useNavigate();
         </Button>
       </CardContent>
       <CardActions>
-        <Button variant='contained' onClick={navigate(`/edit/${id}`)} color='warning' size="small"><EditIcon/></Button>
-        <Button variant='contained' color='danger' onClick={() => deleteBook(id)} size="small"><DeleteIcon/></Button>
+      <Button onClick={navigate(`/edit/${id}`)} variant="outlined" startIcon={<EditIcon />}>
+        Edit
+      </Button>
+      <Button onClick={() => deleteBook(id)} variant="outlined" startIcon={<DeleteIcon />}>
+        Delete
+      </Button>
       </CardActions>
     </Card>
   );
