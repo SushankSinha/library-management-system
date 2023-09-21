@@ -7,16 +7,16 @@ import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
 import API_BASE_URL from './global'
 
-function LibraryForm() {
+function EditBook() {
 
   const [name, setName] = useState('')
   const [poster, setPoster] = useState('')
   const [rating, setRating] = useState('')
   const [summary, setSummary] = useState('')
 
- const addBook = async() => {
+ const updateBook = async() => {
     try{
-        await axios.post(`${API_BASE_URL}/add`, {name : name, poster : poster, rating : rating, summary : summary});
+        await axios.put(`${API_BASE_URL}/edit/:id`, {name : name, poster : poster, rating : rating, summary : summary});
     }catch(err){
         console.log(err)
     }
@@ -81,8 +81,8 @@ function LibraryForm() {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  onClick={addBook}
-                > Add Book
+                  onClick={updateBook}
+                > Update Book
                 </Button>
               </Grid>
             </Grid>
@@ -92,4 +92,4 @@ function LibraryForm() {
   );
 }
 
-export default LibraryForm;
+export default EditBook;

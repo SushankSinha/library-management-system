@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import LibraryItem from './LibraryItem';
+import LibraryItem from './BookCard';
 import axios from 'axios';
 import API_BASE_URL from './global'
 import { Link } from "react-router-dom";
 
-function LibraryList() {
+function AllBooksData() {
   const [books, setBooks] = useState([]);
 
   const getAllBooks = async() => {
@@ -30,7 +30,7 @@ function LibraryList() {
         Library's List of Books
       </h1>
       <Link to='/add'>
-      <Button style={{display : 'block', margin : 'auto', width : '30px'}} variant="contained" color="primary">
+      <Button style={{display : 'block', margin : 'auto', width : '10%'}} variant="contained" color="primary">
         Add Book
       </Button>
       </Link>
@@ -45,4 +45,4 @@ function LibraryList() {
   );
 }
 
-export default LibraryList;
+export default AllBooksData;

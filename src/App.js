@@ -1,16 +1,17 @@
 import './App.css';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import LibraryList from './Components/LibraryList';
-import LibraryForm from './Components/LibraryForm';
+import AllBooksData from './Components/AllBooksData';
+import AddBook from './Components/AddBook';
+import EditBook from './Components/EditBook';
 
 function App() {
   return (
     <div className='App'>
     <Routes>
-        <Route path="/" element={<LibraryList/>} />
-        <Route path="/add" element={<LibraryForm/>} />
-        <Route path="/edit/:id" element={<LibraryForm/>} />
+        <Route path="/" element={<AllBooksData/>} />
+        <Route path="/add" element={<AddBook/>} />
+        <Route path="/edit/:id" element={<EditBook/>} />
     </Routes>
     </div>
   );
