@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import LibraryItem from './BookCard';
+import BookCard from './BookCard';
 import axios from 'axios';
 import API_BASE_URL from './global'
 import { Link } from "react-router-dom";
@@ -36,7 +36,7 @@ function AllBooksData() {
       <Grid container spacing={2}>
         {books.map((book, index) => {return(
           <Grid item xs={12} sm={6} md={4} key={book.id}>
-            <LibraryItem key={index} id = {book._id} book={book} />
+            <BookCard key={index} id = {book._id} book={book} />
           </Grid>
         )})}
       </Grid>

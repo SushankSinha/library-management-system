@@ -10,7 +10,7 @@ import API_BASE_URL from './global';
 import { useNavigate } from 'react-router-dom';
 import CardActions from '@mui/material/CardActions';
 
-function BookCard({ book }) {
+function BookCard({ book, id }) {
 
   const [available, setAvailable] = useState(true);
 
@@ -43,8 +43,8 @@ const navigate = useNavigate();
         </Button>
       </CardContent>
       <CardActions>
-        <Button onClick={navigate(`/edit/${book.id}`)} color='warning' size="small"><EditIcon/></Button>
-        <Button color='danger' onClick={() => deleteBook(book.id)} size="small"><DeleteIcon/></Button>
+        <Button variant='contained' onClick={navigate(`/edit/${id}`)} color='warning' size="small"><EditIcon/></Button>
+        <Button variant='contained' color='danger' onClick={() => deleteBook(id)} size="small"><DeleteIcon/></Button>
       </CardActions>
     </Card>
   );
