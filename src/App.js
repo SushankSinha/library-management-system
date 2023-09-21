@@ -7,9 +7,9 @@ import LibraryForm from './Components/LibraryForm';
 function App() {
   return (
     <Routes>
-        <Route path="/" exact component={LibraryList} />
-        <Route path="/add" component={LibraryForm} />
-        <Route path="/edit/:id" component={LibraryForm} />
+        <Route path="/" element=<LibraryList/> />
+        <Route path="/add" element=<LibraryForm/> />
+        <Route path="/edit/:id" element=<LibraryForm/> />
     </Routes>
   );
 }
