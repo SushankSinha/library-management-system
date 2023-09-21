@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import { Formik, Form, Field } from 'formik'; // Import Formik components
+import { Formik, Form, Field } from 'formik';
 
 function LibraryForm({ match, history }) {
   const isEditMode = !!match.params.id;
@@ -15,7 +15,7 @@ function LibraryForm({ match, history }) {
         {isEditMode ? 'Edit Book' : 'Add Book'}
       </Typography>
       <Formik
-        initialValues={{ title: '', author: '', year: '' }}
+        initialValues={{ title: '', summary: '', rating: '', poster : '' }}
         onSubmit={(values, { setSubmitting }) => {
           // Handle form submission here
           // You can access isSubmitting inside this function
@@ -23,7 +23,6 @@ function LibraryForm({ match, history }) {
           setSubmitting(false); // Don't forget to set isSubmitting to false when done
         }}
       >
-        {({ isSubmitting }) => (
           <Form>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -68,14 +67,12 @@ function LibraryForm({ match, history }) {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  disabled={isSubmitting}
                 >
                   {isEditMode ? 'Update Book' : 'Add Book'}
                 </Button>
               </Grid>
             </Grid>
           </Form>
-        )}
       </Formik>
     </Container>
   );
