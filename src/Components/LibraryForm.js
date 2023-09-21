@@ -1,38 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { Formik, Form, Field } from 'formik';
+import axios from 'axios';
+import API_BASE_URL from './global'
 
-function LibraryForm({ match, history }) {
-  const isEditMode = !!match.params.id;
+function LibraryForm() {
+
+  const [name, setName] = useState('')
+  const [poster, setPoster] = useState('')
+  const [rating, setRating] = useState('')
+  const [summary, setSummary] = useState('')
+
+ const addBook = async() => {
+    try{
+        await axios.post(`${API_BASE_URL}/add`, {name : name, poster : poster, rating : rating, summary : summary});
+    }catch(err){
+        console.log(err)
+    }
+  
+};
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" gutterBottom>
-        {isEditMode ? 'Edit Book' : 'Add Book'}
-      </Typography>
-      <Formik
-        initialValues={{ title: '', summary: '', rating: '', poster : '' }}
-        onSubmit={(values, { setSubmitting }) => {
-          // Handle form submission here
-          // You can access isSubmitting inside this function
-          console.log('Submitting...', values);
-          setSubmitting(false); // Don't forget to set isSubmitting to false when done
-        }}
-      >
-        {({ isSubmitting }) => (
+      <Formik>
           <Form>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Field
                   as={TextField}
                   fullWidth
-                  name="title"
+                  name="name"
                   label="Title"
                   variant="outlined"
+                  required = {true}
+                  value = {name}
+                  onChange = {(e)=>{setName(e.target.value)}}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -40,8 +45,11 @@ function LibraryForm({ match, history }) {
                   as={TextField}
                   fullWidth
                   name="poster"
-                  label="Poster"
+                  label="Poster Link"
                   variant="outlined"
+                  required = {true}
+                  value = {poster}
+                  onChange = {(e)=>{setPoster(e.target.value)}}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -51,6 +59,9 @@ function LibraryForm({ match, history }) {
                   name="rating"
                   label="Rating"
                   variant="outlined"
+                  required = {true}
+                  value = {rating}
+                  onChange = {(e)=>{setRating(e.target.value)}}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -60,22 +71,22 @@ function LibraryForm({ match, history }) {
                   name="summary"
                   label="Summary"
                   variant="outlined"
+                  required = {true}
+                  value = {summary}
+                  onChange = {(e)=>{setSummary(e.target.value)}}
                 />
               </Grid>
-              {/* Add more form fields as needed */}
               <Grid item xs={12}>
                 <Button
                   type="submit"
                   variant="contained"
                   color="primary"
-                  disabled={isSubmitting}
+                  onClick={addBook}
                 >
-                  {isEditMode ? 'Update Book' : 'Add Book'}
                 </Button>
               </Grid>
             </Grid>
           </Form>
-        )}
       </Formik>
     </Container>
   );
