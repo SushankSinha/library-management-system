@@ -10,13 +10,13 @@ import API_BASE_URL from './global';
 import { useNavigate } from 'react-router-dom';
 import CardActions from '@mui/material/CardActions';
 
-function BookCard({ book, id }) {
+function BookCard({ book }) {
 
   const [available, setAvailable] = useState(true);
 
-  const deleteBook = async(id) => {
+  const deleteBook = async() => {
     try{
-        await axios.delete(`${API_BASE_URL}/id`);
+        await axios.delete(`${API_BASE_URL}/${book._id}`);
     }catch(err){
         console.log(err)
     }
@@ -43,10 +43,10 @@ const navigate = useNavigate();
         </Button>
       </CardContent>
       <CardActions>
-      <Button onClick={()=>navigate(`/edit/${id}`)} variant="outlined" startIcon={<EditIcon />}>
+      <Button onClick={()=>navigate(`/edit/${book._id}`)} variant="outlined" startIcon={<EditIcon />}>
         Edit
       </Button>
-      <Button onClick={() => deleteBook(id)} variant="outlined" startIcon={<DeleteIcon />}>
+      <Button onClick={deleteBook} variant="outlined" startIcon={<DeleteIcon />}>
         Delete
       </Button>
       </CardActions>

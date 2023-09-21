@@ -7,12 +7,12 @@ import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
 import API_BASE_URL from './global'
 
-function EditBook() {
+function EditBook({editData}) {
 
-  const [name, setName] = useState('')
-  const [poster, setPoster] = useState('')
-  const [rating, setRating] = useState('')
-  const [summary, setSummary] = useState('')
+  const [name, setName] = useState(editData.name)
+  const [poster, setPoster] = useState(editData.poster)
+  const [rating, setRating] = useState(editData.rating)
+  const [summary, setSummary] = useState(editData.summary)
 
  const updateBook = async() => {
     try{

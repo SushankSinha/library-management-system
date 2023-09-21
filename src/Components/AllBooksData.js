@@ -7,7 +7,7 @@ import axios from 'axios';
 import API_BASE_URL from './global'
 import { Link } from "react-router-dom";
 
-function AllBooksData() {
+function AllBooksData({setEditData}) {
   const [books, setBooks] = useState([]);
 
   const getAllBooks = async() => {
@@ -34,9 +34,8 @@ function AllBooksData() {
       </Button>
       </Link>
       <Grid >
-        {books.map((book, index) => {return(
-            <BookCard key={index} id = {book._id} book={book} />
-        )})}
+        {books.map((book, index) => {return(<BookCard key={index} id = {book._id} book={book} setEditData={book} />)
+        })}
       </Grid>
     </Container>
   );
