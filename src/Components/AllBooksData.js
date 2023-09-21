@@ -14,7 +14,6 @@ function AllBooksData() {
     try{
        const response = await axios.get(`${API_BASE_URL}/books`);
        setBooks(response.data)
-       console.log(response.data)
     }catch(err){
         console.log(err)
     }

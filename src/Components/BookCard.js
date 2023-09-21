@@ -14,9 +14,9 @@ function BookCard({ book }) {
 
   const [available, setAvailable] = useState(true);
 
-  const deleteBook = async() => {
+  const deleteBook = async(id) => {
     try{
-        await axios.delete(`${API_BASE_URL}/${book.id}`);
+        await axios.delete(`${API_BASE_URL}/id`);
     }catch(err){
         console.log(err)
     }
@@ -44,7 +44,7 @@ const navigate = useNavigate();
       </CardContent>
       <CardActions>
         <Button onClick={navigate(`/edit/${book.id}`)} color='warning' size="small"><EditIcon/></Button>
-        <Button color='danger' onClick={deleteBook} size="small"><DeleteIcon/></Button>
+        <Button color='danger' onClick={() => deleteBook(book.id)} size="small"><DeleteIcon/></Button>
       </CardActions>
     </Card>
   );
