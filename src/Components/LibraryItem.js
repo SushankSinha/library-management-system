@@ -12,9 +12,7 @@ function LibraryItem({ book }) {
         <Typography style = {{fontWeight : 'bold', margin : '10px auto'}} variant="h5" component="div">
           {book.title}
         </Typography>
-        <Typography style={{width : '200px', height : '300px', margin : '10px auto'}} variant="body2" color="text.secondary">
-           {book.poster}
-        </Typography>
+        <image style={{width : '200px', height : '300px', margin : '10px auto'}} src = {book.poster} />
         <Typography style={{margin : '10px auto'}} variant="body2" color="text.secondary">
           <strong>Rating:</strong> {book.rating}
         </Typography>
