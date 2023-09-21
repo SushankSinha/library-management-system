@@ -3,11 +3,26 @@ import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import axios from 'axios';
+import API_BASE_URL from './global';
+import { Link } from 'react-router-dom';
 
 function LibraryItem({ book }) {
+
+ const deleteBook = async() => {
+    try{
+        await axios.delete(`${API_BASE_URL}/${book.id}`);
+    }catch(err){
+        console.log(err)
+    }
+  
+};
+
   const [available, setAvailable] = useState(true)
   return (
-    <Card style={{width : '250px', minHeight : '450px', height : 'fit-content', margin : '15px', padding : '5px'}} className="library-item" elevation={3}>
+    <Card style={{width : '350px', minHeight : '450px', height : 'fit-content', margin : '15px auto', padding : '5px'}} className="library-item" elevation={3}>
       <CardContent>
         <Typography style = {{fontWeight : 'bold', margin : '10px auto'}} variant="h5" component="div">
           {book.name}
@@ -19,8 +34,16 @@ function LibraryItem({ book }) {
         <Typography style={{margin : '10px auto'}} variant="body2" color="text.secondary">
           <strong>Summary:</strong> {book.summary}
         </Typography>
-        <Button onClick={()=> setAvailable(!available)} >
-          {available===true? 'Available' : 'Issued'}
+        <Button variant='contained' onClick={()=> setAvailable(!available)} >
+         Status : {available===true? 'Available' : 'Unavailable'}
+        </Button>
+        <Link to = '/edit/:id' style={{color : 'white', textDecoration : 'none'}}>
+        <Button color='warning' style={{display : 'flex', flexDirection : 'row', margin : '5px 25px'}}>
+         <EditIcon/>
+        </Button>
+        </Link>
+        <Button color='danger' onClick = {deleteBook} style={{display : 'flex', flexDirection : 'row', margin : '5px 25px'}}>
+         <DeleteIcon/>
         </Button>
       </CardContent>
     </Card>

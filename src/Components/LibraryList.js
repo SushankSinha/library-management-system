@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import LibraryItem from './LibraryItem';
@@ -27,18 +26,18 @@ function LibraryList() {
 
   return (
     <Container maxWidth="md">
-      <Typography variant="h4" gutterBottom>
-        Library List
-      </Typography>
+      <h1 style={{textAlign : 'center', margin : '10px auto', alignContent : 'center'}} variant="h4" gutterBottom>
+        Library's List of Books
+      </h1>
       <Link to='/add'>
-      <Button variant="contained" color="primary">
+      <Button style={{display : 'block', margin : 'auto', width : '30px'}} variant="contained" color="primary">
         Add Book
       </Button>
       </Link>
       <Grid container spacing={2}>
         {books.map((book, index) => {return(
           <Grid item xs={12} sm={6} md={4} key={book.id}>
-            <LibraryItem key={index} book={book} />
+            <LibraryItem key={index} id = {book._id} book={book} />
           </Grid>
         )})}
       </Grid>

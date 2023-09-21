@@ -24,7 +24,7 @@ function LibraryForm() {
 };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" style = {{margin : '5% auto'}}>
       <Formik>
           <Form>
             <Grid container spacing={2}>
@@ -82,7 +82,7 @@ function LibraryForm() {
                   variant="contained"
                   color="primary"
                   onClick={addBook}
-                >
+                > Add Book
                 </Button>
               </Grid>
             </Grid>
