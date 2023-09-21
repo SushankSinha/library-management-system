@@ -37,7 +37,7 @@ function LibraryItem({ book }) {
         <Button variant='contained' onClick={()=> setAvailable(!available)} >
          Status : {available===true? 'Available' : 'Unavailable'}
         </Button>
-        <Link to = '/edit/:id' style={{color : 'white', textDecoration : 'none'}}>
+        <Link to = {`/edit/${book.id}`} style={{color : 'white', textDecoration : 'none'}}>
         <Button color='warning' style={{display : 'flex', flexDirection : 'row', margin : '5px 25px'}}>
          <EditIcon/>
         </Button>
