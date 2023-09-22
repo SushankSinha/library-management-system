@@ -91,6 +91,15 @@ function EditBook({editData}) {
                 > Update Book
                 </Button>
               </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  onClick={()=>{navigate('/')}}
+                > Home
+                </Button>
+              </Grid>
             </Grid>
           </Form>
       </Formik>
