@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
@@ -13,10 +13,18 @@ import CardActions from '@mui/material/CardActions';
 function BookCard({ book }) {
 
   const [available, setAvailable] = useState(true);
+  const [refresh, setRefresh] = useState(false);
+
+  useEffect(() => {
+    window.location.reload(refresh)
+  }, [refresh]);
 
   const deleteBook = async() => {
     try{
-        await axios.delete(`${API_BASE_URL}/${book._id}`);
+       const response = await axios.delete(`${API_BASE_URL}/${book._id}`);
+       if(response.status===204){
+        setRefresh(!refresh)
+       }
     }catch(err){
         console.log(err)
     }

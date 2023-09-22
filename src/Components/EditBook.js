@@ -5,7 +5,8 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
-import API_BASE_URL from './global'
+import API_BASE_URL from './global';
+import { useNavigate } from 'react-router-dom';
 
 function EditBook({editData}) {
 
@@ -14,9 +15,14 @@ function EditBook({editData}) {
   const [rating, setRating] = useState(editData.rating)
   const [summary, setSummary] = useState(editData.summary)
 
+  const navigate = useNavigate();
+
  const updateBook = async() => {
     try{
-        await axios.put(`${API_BASE_URL}/edit/:id`, {name : name, poster : poster, rating : rating, summary : summary});
+      const response = await axios.put(`${API_BASE_URL}/edit/:id`, {name : name, poster : poster, rating : rating, summary : summary});
+      if(response.status===201){
+        navigate('/')
+      }
     }catch(err){
         console.log(err)
     }

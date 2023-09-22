@@ -5,7 +5,8 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
-import API_BASE_URL from './global'
+import API_BASE_URL from './global';
+import { useNavigate } from 'react-router-dom';
 
 function AddBook() {
 
@@ -14,9 +15,14 @@ function AddBook() {
   const [rating, setRating] = useState('')
   const [summary, setSummary] = useState('')
 
+  const navigate = useNavigate();
+
  const addBook = async() => {
     try{
-        await axios.post(`${API_BASE_URL}/add`, {name : name, poster : poster, rating : rating, summary : summary});
+      const response =  await axios.post(`${API_BASE_URL}/add`, {name : name, poster : poster, rating : rating, summary : summary});
+      if(response.status===201){
+        navigate('/')
+      }
     }catch(err){
         console.log(err)
     }
@@ -37,7 +43,7 @@ function AddBook() {
                   variant="outlined"
                   required = {true}
                   value = {name}
-                  onChange = {(e)=>{setName(e.target.value)}}
+                  onChange = {(e)=>setName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -49,7 +55,7 @@ function AddBook() {
                   variant="outlined"
                   required = {true}
                   value = {poster}
-                  onChange = {(e)=>{setPoster(e.target.value)}}
+                  onChange = {(e)=>setPoster(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -61,7 +67,7 @@ function AddBook() {
                   variant="outlined"
                   required = {true}
                   value = {rating}
-                  onChange = {(e)=>{setRating(e.target.value)}}
+                  onChange = {(e)=>setRating(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -73,7 +79,7 @@ function AddBook() {
                   variant="outlined"
                   required = {true}
                   value = {summary}
-                  onChange = {(e)=>{setSummary(e.target.value)}}
+                  onChange = {(e)=>setSummary(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
