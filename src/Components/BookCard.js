@@ -33,7 +33,7 @@ function BookCard({ book }) {
       setCurrentStatus('Available')
     }
     try{
-      const response = await axios.put(`${API_BASE_URL}/status/${book._id}`, {currentStatus});
+      const response = await axios.post(`${API_BASE_URL}/status/${book._id}`, {currentStatus});
       if(response.status===201){
         alert('Status Updated')
         window.location.reload()
