@@ -27,7 +27,7 @@ function BookCard({ book }) {
   };
 
   async function status(){
-
+    setCurrentStatus('Unavailable')
     try{
       const response = await axios.put(`${API_BASE_URL}/status/${book._id}`, {currentStatus});
       if(response.status===201){
@@ -77,8 +77,9 @@ function BookCard({ book }) {
         <Typography style={{margin : '10px auto', height : '75px', overflow : 'scroll'}} variant="body2" color="text.secondary">
           <strong>Summary:</strong> {book.summary}
         </Typography>
-        <Button style = {{fontWeight : 'bold'}} variant='contained' onClick={()=> {status(); setCurrentStatus('Unavailable')}} >
-         Status : {book.status}
+        <Typography>Status : {book.status}</Typography>
+        <Button variant='contained' onClick={()=> status()} >
+         Update Status
         </Button>
       </CardContent>
       <CardActions style={{textAlign : 'center', justifyContent : 'center'}}>
