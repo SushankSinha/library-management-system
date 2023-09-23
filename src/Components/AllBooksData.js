@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
 import BookCard from './BookCard';
 import axios from 'axios';
 import API_BASE_URL from './global'
-import { Link } from "react-router-dom";
+import TextField from '@mui/material/TextField';
 
-function AllBooksData({setEditData}) {
+
+function AllBooksData() {
   const [books, setBooks] = useState([]);
+  const [searchBook, setSearchBook] = useState(books);
+
+  const handleSearch = (event) => {
+    if(event.target.value === null){;
+    setSearchBook(books);
+    return 
+  }
+  const searchedBook = books.filter((item)=> item.name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1 )
+  setSearchBook(searchedBook)
+};
 
   const getAllBooks = async() => {
     try{
        const response = await axios.get(`${API_BASE_URL}/books`);
        setBooks(response.data)
+       setSearchBook(response.data)
     }catch(err){
         console.log(err)
     }
@@ -25,18 +35,19 @@ function AllBooksData({setEditData}) {
 
   return (
     <Container maxWidth="md">
-      <h1 style={{textAlign : 'center', margin : '10px auto', alignContent : 'center'}} variant="h4" gutterBottom>
-        Library's List of Books
-      </h1>
-      <Link to='/add'>
-      <Button style={{display : 'block', margin : 'auto', width : '10%'}} variant="contained" color="primary">
-        Add Book
-      </Button>
-      </Link>
-      <Grid >
-        {books.map((book, index) => {return(<BookCard key={index} id = {book._id} book={book} setEditData={book} />)
+      <Container style = {{ width : '50%', margin : "20px auto", display : 'block'}}>
+      <TextField
+        type="text"
+        placeholder="Search Books"
+        onChange={handleSearch}
+        variant='outlined'
+        fullWidth
+      />
+    </Container>
+      <div style={{display : 'flex', flexDirection : 'row', flexWrap : 'wrap', justifyContent : 'center'}}>
+        {searchBook.map((book, index) => {return(<BookCard key={index} id = {book._id} book={book} />)
         })}
-      </Grid>
+      </div>
     </Container>
   );
 }
