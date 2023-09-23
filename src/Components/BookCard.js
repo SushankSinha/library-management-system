@@ -26,8 +26,13 @@ function BookCard({ book }) {
     setOpen(!open); 
   };
 
-  async function status(){
+  if(book.status === 'Available'){
     setCurrentStatus('Unavailable')
+  }else if(book.status === 'Unavailable'){
+    setCurrentStatus('Available')
+  }
+
+  async function status(){
     try{
       const response = await axios.put(`${API_BASE_URL}/status/${book._id}`, {currentStatus});
       if(response.status===201){
