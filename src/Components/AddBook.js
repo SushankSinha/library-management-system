@@ -14,6 +14,7 @@ function AddBook() {
   const [poster, setPoster] = useState("");
   const [author, setAuthor] = useState("");
   const [summary, setSummary] = useState("");
+  const [allowed, setAllowed] = useState(true);
 
   const navigate = useNavigate();
 
@@ -34,6 +35,7 @@ function AddBook() {
         setName("");
         setPoster("");
         setSummary("");
+        setAllowed(false)
       }
     } catch (err) {
       if (err.message === "Request failed with status code 400") {
@@ -44,85 +46,6 @@ function AddBook() {
   }
 
   return (
-    // <Container maxWidth="sm" style = {{margin : '2% auto', textAlign : 'center', justifyContent : 'center'}}>
-
-    //     <h1 >Add a book</h1>
-
-    //       <form method = 'POST'>
-    //         <Grid container spacing={2}>
-    //           <Grid item xs={12}>
-    //             <TextField
-    //               fullWidth
-    //               name="name"
-    //               label="Title"
-    //               variant="outlined"
-    //               text = 'text'
-    //               autoComplete='on'
-    //               required = {true}
-    //               value = {name}
-    //               onChange = {(e)=>setName(e.target.value)}
-    //             />
-    //           </Grid>
-    //           <Grid item xs={12}>
-    //             <TextField
-    //               fullWidth
-    //               name="poster"
-    //               label="Poster Link"
-    // variant="outlined"
-    // required = {true}
-    // text = 'text'
-    // autoComplete='on'
-    // value = {poster}
-    // onChange = {(e)=>setPoster(e.target.value)}
-    //             />
-    //           </Grid>
-    //           <Grid item xs={12}>
-    //             <TextField
-    //               fullWidth
-    //               name="author"
-    //               label="Author"
-    //               variant="outlined"
-    //               text = 'text'
-    //               autoComplete='on'
-    //               required = {true}
-    //               value = {author}
-    //               onChange = {(e)=>setAuthor(e.target.value)}
-    //             />
-    //           </Grid>
-    //           <Grid item xs={12}>
-    //             <TextField
-    //               fullWidth
-    //               name="summary"
-    //               label="Summary"
-    //               variant="outlined"
-    //               text = 'text'
-    //               autoComplete='on'
-    //               required = {true}
-    //               value = {summary}
-    //               onChange = {(e)=>setSummary(e.target.value)}
-    //             />
-    //           </Grid>
-    // <Grid style={{margin : '10px'}} item xs={12}>
-    //   <Button
-    //     type="submit"
-    //     variant="contained"
-    //     color="success"
-    //     onClick={addBook}
-    //     style={{marginLeft : '5%', marginRight : '15%', fontWeight : 'bold'}}
-    //   > Add Book
-    //   </Button>
-    //   <Button
-    //     type="submit"
-    //     variant="contained"
-    //     color="primary"
-    //     onClick={()=>{navigate('/')}}
-    //     style={{marginLeft : '15%', marginRight : '5%', fontWeight : 'bold'}}
-    //   > Home
-    //   </Button>
-    // </Grid>
-    //         </Grid>
-    //       </form>
-    // </Container>
 
     <Container
       maxWidth="sm"
@@ -149,7 +72,7 @@ function AddBook() {
                 autoComplete="on"
                 required={true}
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {setName(e.target.value); setAllowed(false)}}
               />
             </Grid>
             <Grid item xs={12}>
@@ -163,7 +86,7 @@ function AddBook() {
                 text="text"
                 autoComplete="on"
                 value={poster}
-                onChange={(e) => setPoster(e.target.value)}
+                onChange={(e) => {setPoster(e.target.value); setAllowed(false)}}
               />
             </Grid>
             <Grid item xs={12}>
@@ -177,7 +100,7 @@ function AddBook() {
                 text="text"
                 autoComplete="on"
                 value={author}
-                onChange={(e) => setAuthor(e.target.value)}
+                onChange={(e) => {setAuthor(e.target.value); setAllowed(false)}}
               />
             </Grid>
             <Grid item xs={12}>
@@ -191,7 +114,7 @@ function AddBook() {
                 text="text"
                 autoComplete="on"
                 value={summary}
-                onChange={(e) => setSummary(e.target.value)}
+                onChange={(e) => {setSummary(e.target.value); setAllowed(false)}}
               />
             </Grid>
             <Grid style={{ margin: "10px" }} item xs={12}>
@@ -205,6 +128,7 @@ function AddBook() {
                   marginRight: "15%",
                   fontWeight: "bold",
                 }}
+                disabled = {allowed}
               >
                 {" "}
                 Add Book
