@@ -26,8 +26,7 @@ function BookCard({ book }) {
     setOpen(!open); 
   };
 
-  async function status(e){
-    e.preventDefault();
+  async function status(){
 
     try{
       const response = await axios.put(`${API_BASE_URL}/status/${book._id}`, {currentStatus});
