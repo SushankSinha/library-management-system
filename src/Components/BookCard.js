@@ -14,7 +14,7 @@ import Container from '@mui/material/Container';
 
 function BookCard({ book }) {
 
-  const [available, setAvailable] = useState(true);
+  const [currentStatus, setCurrentStatus] = useState('');
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(book.name)
   const [poster, setPoster] = useState(book.poster)
@@ -25,6 +25,20 @@ function BookCard({ book }) {
   const toggleEdit = () => {
     setOpen(!open); 
   };
+
+  async function status(e){
+    e.preventDefault();
+
+    try{
+      const response = await axios.put(`${API_BASE_URL}/status/${book._id}`, {currentStatus});
+      if(response.status===201){
+        alert('Status Updated')
+        window.location.reload()
+      }
+    }catch(err){
+        console.log(err)
+    }
+};
 
   async function updateBook(e){
     e.preventDefault();
@@ -37,7 +51,6 @@ function BookCard({ book }) {
     }catch(err){
         console.log(err)
     }
-  
 };
 
   const deleteBook = async() => {
@@ -65,8 +78,8 @@ function BookCard({ book }) {
         <Typography style={{margin : '10px auto', height : '75px', overflow : 'scroll'}} variant="body2" color="text.secondary">
           <strong>Summary:</strong> {book.summary}
         </Typography>
-        <Button style = {{fontWeight : 'bold'}} variant='contained' onClick={()=> setAvailable(!available)} >
-         Status : {available===true? 'Available' : 'Unavailable'}
+        <Button style = {{fontWeight : 'bold'}} variant='contained' onClick={()=> {status(); setCurrentStatus('Unavailable')}} >
+         Status : {book.status}
         </Button>
       </CardContent>
       <CardActions style={{textAlign : 'center', justifyContent : 'center'}}>
