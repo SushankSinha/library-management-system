@@ -34,7 +34,7 @@ function AllBooksData() {
   }, []);
 
   return (
-    <Container maxWidth="md">
+    <Container style = {{ width : '95%', margin : "10px auto", display : 'block'}}>
       <Container style = {{ width : '50%', margin : "20px auto", display : 'block'}}>
       <TextField
         type="text"
