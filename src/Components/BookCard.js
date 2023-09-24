@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState} from 'react';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
@@ -14,7 +14,6 @@ import Container from '@mui/material/Container';
 
 function BookCard({ book }) {
 
-  const [currentStatus, setCurrentStatus] = useState('');
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(book.name)
   const [poster, setPoster] = useState(book.poster)
@@ -25,23 +24,6 @@ function BookCard({ book }) {
   const toggleEdit = () => {
     setOpen(!open); 
   };
-
-  async function status(){
-    if(book.status === 'Available'){
-      setCurrentStatus('Unavailable')
-    }else if(book.status === 'Unavailable'){
-      setCurrentStatus('Available')
-    }
-    try{
-      const response = await axios.post(`${API_BASE_URL}/status/${book._id}`, {currentStatus});
-      if(response.status===201){
-        alert('Status Updated')
-        window.location.reload()
-      }
-    }catch(err){
-        console.log(err)
-    }
-};
 
   async function updateBook(e){
     e.preventDefault();
@@ -81,10 +63,6 @@ function BookCard({ book }) {
         <Typography style={{margin : '10px auto', height : '75px', overflow : 'scroll'}} variant="body2" color="text.secondary">
           <strong>Summary:</strong> {book.summary}
         </Typography>
-        <Typography>Status : {book.status}</Typography>
-        <Button variant='contained' onClick={()=> status()} >
-         Update Status
-        </Button>
       </CardContent>
       <CardActions style={{textAlign : 'center', justifyContent : 'center'}}>
       <Button style={{fontWeight : 'bold'}} color='warning' onClick={() => {toggleEdit()}} variant="contained" startIcon={<EditIcon />}>
