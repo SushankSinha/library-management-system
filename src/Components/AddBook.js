@@ -8,6 +8,8 @@ import axios from "axios";
 import API_BASE_URL from "./global";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 function AddBook() {
   const [name, setName] = useState("");
@@ -15,11 +17,27 @@ function AddBook() {
   const [author, setAuthor] = useState("");
   const [summary, setSummary] = useState("");
   const [allowed, setAllowed] = useState(true);
+  const [open, setOpen] = React.useState(false);
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const navigate = useNavigate();
 
-  async function addBook(e) {
-    e.preventDefault();
+  async function addBook() {
 
     try {
       const response = await axios.post(`${API_BASE_URL}/add`, {
@@ -30,12 +48,11 @@ function AddBook() {
       });
 
       if (response.status === 201) {
-        alert(`${name} added to our library!`);
         setAuthor("");
         setName("");
         setPoster("");
         setSummary("");
-        setAllowed(false)
+        setAllowed(false);
       }
     } catch (err) {
       if (err.message === "Request failed with status code 400") {
@@ -46,7 +63,6 @@ function AddBook() {
   }
 
   return (
-
     <Container
       maxWidth="sm"
       style={{
@@ -72,7 +88,10 @@ function AddBook() {
                 autoComplete="on"
                 required={true}
                 value={name}
-                onChange={(e) => {setName(e.target.value); setAllowed(false)}}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setAllowed(false);
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -86,7 +105,10 @@ function AddBook() {
                 text="text"
                 autoComplete="on"
                 value={poster}
-                onChange={(e) => {setPoster(e.target.value); setAllowed(false)}}
+                onChange={(e) => {
+                  setPoster(e.target.value);
+                  setAllowed(false);
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -100,7 +122,10 @@ function AddBook() {
                 text="text"
                 autoComplete="on"
                 value={author}
-                onChange={(e) => {setAuthor(e.target.value); setAllowed(false)}}
+                onChange={(e) => {
+                  setAuthor(e.target.value);
+                  setAllowed(false);
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -114,25 +139,29 @@ function AddBook() {
                 text="text"
                 autoComplete="on"
                 value={summary}
-                onChange={(e) => {setSummary(e.target.value); setAllowed(false)}}
+                onChange={(e) => {
+                  setSummary(e.target.value);
+                  setAllowed(false);
+                }}
               />
             </Grid>
             <Grid style={{ margin: "10px" }} item xs={12}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="success"
-                onClick={addBook}
-                style={{
-                  marginLeft: "5%",
-                  marginRight: "15%",
-                  fontWeight: "bold",
-                }}
-                disabled = {allowed}
-              >
-                {" "}
-                Add Book
-              </Button>
+                <Button color="success" variant="contained" onClick={()=>{handleClick(); addBook()}} disabled={allowed} style={{ marginLeft: "5%", marginRight: "15%", fontWeight: "bold"}}>
+                  Add Book
+                </Button>
+                <Snackbar
+                  open={open}
+                  autoHideDuration={6000}
+                  onClose={handleClose}
+                >
+                  <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: "100%" }}
+                  >
+                    Book Added Successfully!
+                  </Alert>
+                </Snackbar>
               <Button
                 type="submit"
                 variant="contained"

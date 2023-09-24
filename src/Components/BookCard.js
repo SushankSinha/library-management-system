@@ -11,18 +11,37 @@ import CardActions from '@mui/material/CardActions';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 function BookCard({ book }) {
 
-  const [open, setOpen] = useState(false);
+  const [openEdit, setEditOpen] = useState(false);
   const [name, setName] = useState(book.name)
   const [poster, setPoster] = useState(book.poster)
   const [author, setAuthor] = useState(book.author)
-  const [summary, setSummary] = useState(book.summary)
+  const [summary, setSummary] = useState(book.summary);
+  const [open, setOpen] = useState(false);
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  
+    const handleClick = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen(false);
+    };
 
   
   const toggleEdit = () => {
-    setOpen(!open); 
+    setEditOpen(!openEdit); 
   };
 
   async function updateBook(e){
@@ -30,8 +49,9 @@ function BookCard({ book }) {
     try{
       const response = await axios.put(`${API_BASE_URL}/edit/${book._id}`, {name, poster, author, summary});
       if(response.status===201){
-        alert('Book Updated')
-        window.location.reload()
+        setTimeout(()=>{
+          window.location.reload()
+        }, 5000)
       }
     }catch(err){
         console.log(err)
@@ -42,7 +62,10 @@ function BookCard({ book }) {
     try{
        const response = await axios.delete(`${API_BASE_URL}/${book._id}`);
        if(response.status===204){
-        window.location.reload()
+        setTimeout(()=>{
+          window.location.reload()
+        }, 5000)
+        
        }
     }catch(err){
         console.log(err)
@@ -68,11 +91,16 @@ function BookCard({ book }) {
       <Button style={{fontWeight : 'bold'}} color='warning' onClick={() => {toggleEdit()}} variant="contained" startIcon={<EditIcon />}>
         Edit
       </Button>
-      <Button style={{fontWeight : 'bold'}} color='error' onClick={deleteBook} variant="contained" startIcon={<DeleteIcon />}>
+      <Button style={{fontWeight : 'bold'}} color='error' variant="contained" startIcon={<DeleteIcon />} onClick={()=>{handleClick();deleteBook()}}>
         Delete
       </Button>
+      <Snackbar open={open} autoHideDuration={4500} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          {book.name} Deleted!
+        </Alert>
+      </Snackbar>
       </CardActions>
-      {open && (    <Container maxWidth="sm" style = {{margin : '5% auto'}}>
+      {openEdit && (    <Container maxWidth="sm" style = {{margin : '5% auto'}}>
 
           <form method='PUT'>
             <Grid container spacing={2}>
@@ -125,10 +153,15 @@ function BookCard({ book }) {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  onClick={updateBook}
+                  onClick={()=>{updateBook(); handleClick()}}
                   style={{fontWeight : 'bold'}}
                 > Update Book
                 </Button>
+                <Snackbar open={open} autoHideDuration={4500} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
+          {book.name} Updated!
+        </Alert>
+      </Snackbar>
               </Grid>
             </Grid>
           </form>
