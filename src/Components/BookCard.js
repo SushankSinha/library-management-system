@@ -49,6 +49,7 @@ function BookCard({ book }) {
     try{
       const response = await axios.put(`${API_BASE_URL}/edit/${book._id}`, {name, poster, author, summary});
       if(response.status===201){
+        handleClick();
         setTimeout(()=>{
           window.location.reload()
         }, 5000)
@@ -62,6 +63,7 @@ function BookCard({ book }) {
     try{
        const response = await axios.delete(`${API_BASE_URL}/${book._id}`);
        if(response.status===204){
+        handleClick()
         setTimeout(()=>{
           window.location.reload()
         }, 5000)
@@ -91,7 +93,7 @@ function BookCard({ book }) {
       <Button style={{fontWeight : 'bold'}} color='warning' onClick={() => {toggleEdit()}} variant="contained" startIcon={<EditIcon />}>
         Edit
       </Button>
-      <Button style={{fontWeight : 'bold'}} color='error' variant="contained" startIcon={<DeleteIcon />} onClick={()=>{handleClick();deleteBook()}}>
+      <Button style={{fontWeight : 'bold'}} color='error' variant="contained" startIcon={<DeleteIcon />} onClick={()=>{deleteBook()}}>
         Delete
       </Button>
       <Snackbar open={open} autoHideDuration={4500} onClose={handleClose}>
@@ -153,7 +155,7 @@ function BookCard({ book }) {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  onClick={()=>{updateBook(); handleClick()}}
+                  onClick={()=>{updateBook()}}
                   style={{fontWeight : 'bold'}}
                 > Update Book
                 </Button>
