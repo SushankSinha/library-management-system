@@ -44,15 +44,14 @@ function BookCard({ book }) {
     setEditOpen(!openEdit); 
   };
 
-  async function updateBook(e){
-    e.preventDefault();
+  async function updateBook(){
     try{
       const response = await axios.put(`${API_BASE_URL}/edit/${book._id}`, {name, poster, author, summary});
       if(response.status===201){
         handleClick();
-        // setTimeout(()=>{
-        //   window.location.reload()
-        // }, 5000)
+        setTimeout(()=>{
+          window.location.reload()
+        }, 5000)
       }
     }catch(err){
         console.log(err)
