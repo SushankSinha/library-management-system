@@ -50,9 +50,9 @@ function BookCard({ book }) {
       const response = await axios.put(`${API_BASE_URL}/edit/${book._id}`, {name, poster, author, summary});
       if(response.status===201){
         handleClick();
-        setTimeout(()=>{
-          window.location.reload()
-        }, 5000)
+        // setTimeout(()=>{
+        //   window.location.reload()
+        // }, 5000)
       }
     }catch(err){
         console.log(err)
@@ -155,7 +155,7 @@ function BookCard({ book }) {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  onClick={()=>{updateBook()}}
+                  onClick={updateBook}
                   style={{fontWeight : 'bold'}}
                 > Update Book
                 </Button>
