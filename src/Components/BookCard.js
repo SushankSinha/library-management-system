@@ -127,19 +127,6 @@ function BookCard({ book }) {
         >
           Edit
         </Button>
-        <Snackbar
-                  open={open}
-                  autoHideDuration={4500}
-                  onClose={handleClose}
-                >
-                  <Alert
-                    onClose={handleClose}
-                    severity="warning"
-                    sx={{ width: "100%" }}
-                  >
-                    {book.name} Updated!
-                  </Alert>
-                </Snackbar>
         <Button
           style={{ fontWeight: "bold" }}
           color="error"
@@ -216,6 +203,19 @@ function BookCard({ book }) {
                   {" "}
                   Update Book
                 </Button>
+                <Snackbar
+                  open={open}
+                  autoHideDuration={4500}
+                  onClose={handleClose}
+                >
+                  <Alert
+                    onClose={handleClose}
+                    severity="warning"
+                    sx={{ width: "100%" }}
+                  >
+                    {book.name} Updated!
+                  </Alert>
+                </Snackbar>
               </Grid>
             </Grid>
           </form>
