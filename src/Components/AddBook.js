@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import add from './Sounds/add.mp3'
 
 function AddBook() {
   const [name, setName] = useState("");
@@ -18,6 +19,8 @@ function AddBook() {
   const [summary, setSummary] = useState("");
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState(null);
+
+  const addtrack = new Audio(`${add}`);
 
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -39,6 +42,8 @@ function AddBook() {
 
   async function addBook() {
 
+    addtrack.load();
+
     if(name === "" || poster === "" || author === "" || summary === ""){
       setAlert(false);
     }else {
@@ -52,6 +57,7 @@ function AddBook() {
       });
 
       if (response.status === 201) {
+        addtrack.play();
         setAlert(true)
         setAuthor("");
         setName("");
