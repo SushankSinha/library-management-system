@@ -59,7 +59,6 @@ function AddBook() {
         setSummary("");
       }
     } catch (err) {
-      alert("Book already exists!");
       console.log(err.message);
     }
   }
