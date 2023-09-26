@@ -37,8 +37,7 @@ function AddBook() {
 
   const navigate = useNavigate();
 
-  async function addBook(e) {
-    e.preventDefault()
+  async function addBook() {
 
     if(name === "" || poster === "" || author === "" || summary === ""){
       setAlert(false);
