@@ -59,9 +59,7 @@ function AddBook() {
         setSummary("");
       }
     } catch (err) {
-      if (err.message === "Request failed with status code 400") {
-        alert("Book already exists!");
-      }
+      alert("Book already exists!");
       console.log(err.message);
     }
   }
