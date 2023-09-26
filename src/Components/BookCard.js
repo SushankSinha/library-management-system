@@ -13,6 +13,8 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import add from './Sounds/add.mp3'
+import deleteAudio from './Sounds/delete.mp3'
 
 function BookCard({ book }) {
   const [openEdit, setEditOpen] = useState(false);
@@ -21,6 +23,9 @@ function BookCard({ book }) {
   const [author, setAuthor] = useState(book.author);
   const [summary, setSummary] = useState(book.summary);
   const [open, setOpen] = useState(false);
+
+  const addtrack = new Audio(`${add}`);
+  const deletetrack = new Audio(`${deleteAudio}`);
 
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -43,6 +48,7 @@ function BookCard({ book }) {
   };
 
   async function updateBook() {
+    addtrack.load();
     try {
       const response = await axios.put(`${API_BASE_URL}/edit/${book._id}`, {
         name,
@@ -51,6 +57,7 @@ function BookCard({ book }) {
         summary,
       });
       if (response.status === 201) {
+        addtrack.load();
         handleClick();
         setTimeout(() => {
           window.location.reload();
@@ -62,9 +69,11 @@ function BookCard({ book }) {
   }
 
   const deleteBook = async () => {
+    deletetrack.load()
     try {
       const response = await axios.delete(`${API_BASE_URL}/${book._id}`);
       if (response.status === 204) {
+        deletetrack.play()
         handleClick();
         setTimeout(() => {
           window.location.reload();
