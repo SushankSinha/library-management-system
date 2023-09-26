@@ -98,11 +98,11 @@ function BookCard({ book }) {
     >
       <CardContent>
         <Typography
-          style={{ fontWeight: "bold", margin: "10px auto" }}
+          style={{ fontWeight: "bold", margin: "10px auto", Leng }}
           variant="h5"
           component="div"
         >
-          {book.name}
+          {book.name.length > 19 ? `${book.name.substring(0, 19)}...` : book.name }
         </Typography>
         <img
           style={{ width: "250px", height: "250px", margin: "10px auto" }}
