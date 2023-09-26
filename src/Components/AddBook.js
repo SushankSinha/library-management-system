@@ -16,8 +16,8 @@ function AddBook() {
   const [poster, setPoster] = useState("");
   const [author, setAuthor] = useState("");
   const [summary, setSummary] = useState("");
-  const [allowed, setAllowed] = useState(true);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [alert, setAlert] = useState(null);
 
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -39,6 +39,10 @@ function AddBook() {
 
   async function addBook() {
 
+    if(name === "" || poster === "" || author === "" || summary === ""){
+      setAlert(false);
+    }else {
+
     try {
       const response = await axios.post(`${API_BASE_URL}/add`, {
         name: name,
@@ -48,11 +52,11 @@ function AddBook() {
       });
 
       if (response.status === 201) {
+        setAlert(true)
         setAuthor("");
         setName("");
         setPoster("");
         setSummary("");
-        setAllowed(false);
       }
     } catch (err) {
       if (err.message === "Request failed with status code 400") {
@@ -60,6 +64,7 @@ function AddBook() {
       }
       console.log(err.message);
     }
+  }
   }
 
   return (
@@ -90,7 +95,6 @@ function AddBook() {
                 value={name}
                 onChange={(e) => {
                   setName(e.target.value);
-                  setAllowed(false);
                 }}
               />
             </Grid>
@@ -107,7 +111,6 @@ function AddBook() {
                 value={poster}
                 onChange={(e) => {
                   setPoster(e.target.value);
-                  setAllowed(false);
                 }}
               />
             </Grid>
@@ -124,7 +127,6 @@ function AddBook() {
                 value={author}
                 onChange={(e) => {
                   setAuthor(e.target.value);
-                  setAllowed(false);
                 }}
               />
             </Grid>
@@ -141,15 +143,14 @@ function AddBook() {
                 value={summary}
                 onChange={(e) => {
                   setSummary(e.target.value);
-                  setAllowed(false);
                 }}
               />
             </Grid>
             <Grid style={{ margin: "10px" }} item xs={12}>
-                <Button color="success" variant="contained" onClick={()=>{handleClick(); addBook()}} disabled={allowed} style={{ marginLeft: "5%", marginRight: "15%", fontWeight: "bold"}}>
+                <Button color="success" variant="contained" onClick={()=>{handleClick();addBook()}} style={{ marginLeft: "5%", marginRight: "15%", fontWeight: "bold"}}>
                   Add Book
                 </Button>
-                <Snackbar
+                {alert === true ? (<Snackbar
                   open={open}
                   autoHideDuration={6000}
                   onClose={handleClose}
@@ -161,7 +162,20 @@ function AddBook() {
                   >
                     Book Added Successfully!
                   </Alert>
-                </Snackbar>
+                </Snackbar>) :
+                (<Snackbar
+                  open={open}
+                  autoHideDuration={6000}
+                  onClose={handleClose}
+                >
+                  <Alert
+                    onClose={handleClose}
+                    severity="info"
+                    sx={{ width: "100%" }}
+                  >
+                    All fields are required!
+                  </Alert>
+                </Snackbar>)}
               <Button
                 type="submit"
                 variant="contained"
