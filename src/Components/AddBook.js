@@ -60,6 +60,7 @@ function AddBook() {
       }
     } catch (err) {
       console.log(err.message);
+      window.alert("Book already exists")
     }
   }
   }
