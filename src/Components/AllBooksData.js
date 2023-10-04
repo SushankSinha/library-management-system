@@ -4,7 +4,8 @@ import BookCard from './BookCard';
 import axios from 'axios';
 import API_BASE_URL from './global'
 import TextField from '@mui/material/TextField';
-
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 function AllBooksData() {
   const [books, setBooks] = useState([]);
@@ -33,6 +34,14 @@ function AllBooksData() {
     getAllBooks()
   }, []);
 
+  function CircularIndeterminate() {
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
     <Container style = {{ width : '95%', margin : "10px auto", display : 'block'}}>
       <Container style = {{ width : '50%', margin : "20px auto", display : 'block'}}>
@@ -45,8 +54,8 @@ function AllBooksData() {
       />
     </Container>
       <div style={{display : 'flex', flexDirection : 'row', flexWrap : 'wrap', justifyContent : 'center'}}>
-        {searchBook.map((book, index) => {return(<BookCard key={index} id = {book._id} book={book} />)
-        })}
+        {books.length===0 ? {CircularIndeterminate} : (searchBook.map((book, index) => {return(<BookCard key={index} id = {book._id} book={book} />)
+        }))}
       </div>
     </Container>
   );
