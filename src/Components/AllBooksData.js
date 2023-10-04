@@ -54,7 +54,7 @@ function AllBooksData() {
       />
     </Container>
       <div style={{display : 'flex', flexDirection : 'row', flexWrap : 'wrap', justifyContent : 'center'}}>
-        {books.length===0 ? {CircularIndeterminate} : (searchBook.map((book, index) => {return(<BookCard key={index} id = {book._id} book={book} />)
+        {books.length===0 || books.length === null ? (CircularIndeterminate()) : (searchBook.map((book, index) => {return(<BookCard key={index} id = {book._id} book={book} />)
         }))}
       </div>
     </Container>
